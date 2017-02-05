@@ -1,0 +1,72 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/data/jpa 
+		http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
+	<!-- Configure the data source bean -->
+	<bean id="dataSource" 
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/postgres" />
+		<property name="username" value="postgres" />
+		<property name="password" value="8680880" />
+	</bean>
+
+  	<!-- Create default configuration for Hibernate -->
+  	<bean id="hibernateJpaVendorAdapter" 
+    		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+
+  	<!-- Configure the entity manager factory bean -->
+  	<bean id="entityManagerFactory" 
+    		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    		<property name="dataSource" ref="dataSource" />
+    		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
+    		<!-- Set JPA properties -->
+    		<property name="jpaProperties">
+      			<props>
+        			<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+        			<prop key="hibernate.default_schema">test</prop>
+      			</props>
+    		</property>
+    		<!-- Set base package of your entities -->
+    		<property name="packagesToScan" value="by.intexsoft.helloworldtomcat.model" />
+  	</bean>
+
+  	<!-- Configure the transaction manager bean -->
+  	<bean id="transactionManager" 
+    		class="org.springframework.orm.jpa.JpaTransactionManager">
+    		<property name="entityManagerFactory" ref="entityManagerFactory" />
+  	</bean>
+
+  	<!-- Enable annotation driven transaction management -->
+  	<tx:annotation-driven/>
+  
+  	<!-- Configure Spring Data JPA and set the base package of the repository interfaces -->
+  	<jpa:repositories base-package="by.intexsoft.helloworldtomcat.repository" />
+  
+  	<context:component-scan base-package="by.intexsoft.helloworldtomcat.service"/>
+  
+  	<!-- Configure to plugin JSON as request and response in method handler -->
+  	<bean
+  		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonMessageConverter" />
+			</list>
+		</property>
+  	</bean>
+	
+  	<!-- Configure bean to convert JSON to POJO and vice versa -->
+  	<bean id="jsonMessageConverter" 
+  		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+  	</bean>
+</beans>
