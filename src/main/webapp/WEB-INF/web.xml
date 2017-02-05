@@ -1,14 +1,14 @@
 <web-app>  
-         <!-- Release changes 1.0.1-->
+         <!-- Release changes -->
 	<display-name>Hello World Tomcat</display-name>  
     
-     	<context-param>
-        	<param-name>contextConfigLocation</param-name>
-        	<param-value>WEB-INF/spring-context.xml</param-value>
-    	</context-param>
-    	<listener>
-        	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    	</listener>
+     <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring-context.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
     
 	<servlet>  
 		<servlet-name>dispatcher</servlet-name>  
