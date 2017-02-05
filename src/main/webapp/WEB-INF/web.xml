@@ -1,5 +1,5 @@
 <web-app>  
-         <!-- Release changes 1.0-->
+         <!-- Release changes 1.0.1-->
 	<display-name>Hello World Tomcat</display-name>  
     
      	<context-param>
