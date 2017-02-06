@@ -12,7 +12,7 @@ import by.intexsoft.helloworldtomcat.model.User;
  * Main controller for application
  */
 @RestController
-@RequestMapping(value = "/service")
+@RequestMapping("/service")
 public class SimpleController {
 	
 	@Autowired
@@ -32,7 +32,7 @@ public class SimpleController {
 	 * Method get all users in JSON format
 	 * @return List<{@link User}>
 	 */
-	@RequestMapping(value="/users")
+	@RequestMapping("/users")
 	public List<User> getAllUsers() {
 		List<User> users = userService.getAll();
 		return users;
@@ -43,7 +43,7 @@ public class SimpleController {
 	 * @param name
 	 * @return {@link User}
 	 */
-	@RequestMapping(value="/users/{name}")
+	@RequestMapping("/users/{name}")
 	public User getUser(@PathVariable String name) {
 		User user = userService.getByName(name);
 		return user;
