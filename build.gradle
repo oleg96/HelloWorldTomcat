@@ -14,3 +14,7 @@ dependencies {
 	compile 'com.fasterxml.jackson.core:jackson-databind:2.8.6'
 	compile 'ch.qos.logback:logback-classic:1.2.1'
 }
+
+war {
+    from 'frontend/dist' // adds frontend to the root of the archive
+}
