@@ -15,6 +15,8 @@ dependencies {
 	compile 'ch.qos.logback:logback-classic:1.2.1'
 }
 
+war.dependsOn 'frontend:npm_run_build'
+
 war {
     from 'frontend/dist' // adds frontend to the root of the archive
 }
