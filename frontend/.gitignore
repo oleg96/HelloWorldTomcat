@@ -2,3 +2,7 @@
 .idea/
 dist/
 node_modules/
+src/**/*.map
+src/**/*.js
+src/app/**/*.map
+src/app/**/*.js
