@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 	
 	@Override
-	public User addUser(User user) {
+	public User add(User user) {
 		User savedUser = userRepository.saveAndFlush(user);
 		return savedUser;
 	}
@@ -28,17 +28,17 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User getByName(String name) {
+	public User findByName(String name) {
 		return userRepository.findByName(name);
 	}
 	
 	@Override
-	public User editUser(User user) {
+	public User edit(User user) {
 		return userRepository.saveAndFlush(user);
 	}
 	
 	@Override
-	public List<User> getAll() {
+	public List<User> findAll() {
 		return userRepository.findAll();
 	}
 }

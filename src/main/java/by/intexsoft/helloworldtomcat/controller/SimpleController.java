@@ -41,7 +41,7 @@ public class SimpleController {
 	public List<User> getAllUsers() {
 		LOGGER.info("Start getAllUsers method");
 		try {
-			List<User> users = userService.getAll();
+			List<User> users = userService.findAll();
 			return users;
 		} catch (NullPointerException e) {
 			LOGGER.error("Exception in getAllUsers method: " + e.getLocalizedMessage());
@@ -58,7 +58,7 @@ public class SimpleController {
 	public User getUser(@PathVariable("name") String name) {
 		LOGGER.info("Start getUser method");
 		try {
-			User user = userService.getByName(name);
+			User user = userService.findByName(name);
 			return user;
 		} catch (NullPointerException e) {
 			LOGGER.error("Exception in getUser method: " + e.getLocalizedMessage());
