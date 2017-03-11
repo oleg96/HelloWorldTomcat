@@ -1,0 +1,19 @@
+<div class="container">
+	<h3>Search user by name</h3>
+	<input class="form-control" type="text" [(ngModel)]='inputText'/>
+	<button type="button" class="btn btn-default" (click)="findUserByName()">Find</button>
+	<table class="col-xs-12 table table-condensed">
+        <thead>
+            <tr>
+                <th>User Id</th>
+                <th>User Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="user">
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -6,3 +6,9 @@ src/**/*.map
 src/**/*.js
 src/app/**/*.map
 src/app/**/*.js
+src/app/log/**/*.js
+src/app/log/**/*.map
+src/app/model/**/*.js
+src/app/model/**/*.map
+src/app/users/**/*.js
+src/app/users/**/*.map

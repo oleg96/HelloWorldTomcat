@@ -13,7 +13,7 @@ public interface UserService {
 	 * @param user
 	 * @return {@link User}
 	 */
-	User addUser(User user);
+	User add(User user);
 	/**
 	 * Method removes user from database
 	 * @param id
@@ -24,16 +24,16 @@ public interface UserService {
 	 * @param name
 	 * @return {@link User}
 	 */
-	User getByName(String name);
+	User findByName(String name);
 	/**
 	 * Method edit user in database
 	 * @param user
 	 * @return {@link User}
 	 */
-	User editUser(User user);
+	User edit(User user);
 	/**
 	 * Method get all users from database
 	 * @return List<{@link User}>
 	 */
-	List<User> getAll();
+	List<User> findAll();
 }
