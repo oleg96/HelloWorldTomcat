@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { FormsModule } from "@angular/forms";
 import { BrowserModule} from '@angular/platform-browser';
 import { UsersComponent } from './users/users.component';
@@ -10,7 +11,7 @@ import { RouterModule } from "@angular/router";
 import { UserSearchComponent } from "./users/user-search.component";
 
 @NgModule({
-    imports: [ AppRoutingModule, RouterModule, BrowserModule, FormsModule ],
+    imports: [ AppRoutingModule, RouterModule, BrowserModule, HttpModule, FormsModule ],
     declarations: [ AppComponent, UsersComponent, UserSearchComponent ],
     providers: [ UserService, LogService ],
     bootstrap: [ AppComponent ]

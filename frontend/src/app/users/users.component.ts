@@ -8,7 +8,7 @@ import { User } from '../model/user';
 })
 
 export class UsersComponent implements OnInit {
-    users: User[] = [];
+    users: User[];
 
     constructor(private userService: UserService) { }
 
@@ -16,7 +16,12 @@ export class UsersComponent implements OnInit {
         this.userService.add(id, name);
     }
 
+    findAll() {
+        this.userService.findAll()
+            .then(usersFromService => this.users = usersFromService);
+    }
+
     ngOnInit() {
-        this.users = this.userService.findAll();
+        this.findAll();
     }
 }

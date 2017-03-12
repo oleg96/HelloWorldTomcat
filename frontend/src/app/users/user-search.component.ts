@@ -7,13 +7,18 @@ import { User } from '../model/user';
     templateUrl: 'user-search.component.html',
 })
 
-export class UserSearchComponent {
+export class UserSearchComponent implements OnInit {
     user: User;
     inputText: string;
 
     constructor(private userService: UserService) { }
 
     findUserByName() {
-        this.user = this.userService.findByName(this.inputText);
+        this.userService.findByName(this.inputText)
+            .then(searchFromService => this.user = searchFromService);
+    }
+
+    ngOnInit() {
+        this.findUserByName();
     }
 }
