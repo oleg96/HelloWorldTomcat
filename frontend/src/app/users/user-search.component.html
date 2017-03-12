@@ -1,7 +1,5 @@
 <div class="container">
-	<h3>Search user by name</h3>
-	<input class="form-control" type="text" [(ngModel)]='inputText'/>
-	<button type="button" class="btn btn-default" (click)="findUserByName()">Find</button>
+	<input #searchBox class="form-control" type="text" placeholder="Search user by name..." [(ngModel)]='inputText' (keyup)="findUserByName(searchBox.value)"/>
 	<table class="col-xs-12 table table-condensed">
         <thead>
             <tr>

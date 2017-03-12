@@ -1,44 +1,31 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
 import { LogService } from '../log/log.service';
+import 'rxjs/add/operator/toPromise';
+import { Http } from "@angular/http";
 
 @Injectable()
 export class UserService {
-    private users: User[] = [];
-    private user: User;
+    private users: User[];
 
-    constructor(private logService: LogService) { }
+    constructor(private logService: LogService, private http: Http) { }
 
-    findAll(): User[] {
-        this.logService.write("Get users from service");
-        this.users.length = 0;
-        fetch('service/users')
-            .then((responce) => responce.json())
-            .then((loadedUsers) => {
-                for (let index = 0; index < (<any>loadedUsers).length; index++) {
-                    this.users.push(new User(loadedUsers[index].id, loadedUsers[index].name));
-                }
-            })
+    findAll(): Promise<User[]> {
+        return this.http.get('service/users')
+            .toPromise()
+            .then(response => response.json())
             .catch(error => {
                 this.logService.write('Request failed: ' + error);
             });
-        return this.users;
     }
 
-    findByName(inputText: string): User {
-        this.logService.write("Find user by service");
-        this.users.length = 0;
-        fetch('service/users/'+inputText)
-            .then((responce) => responce.json())
-            .then((loadedUser) => {
-                for (let index = 0; index < (<any>loadedUser).length; index++) {
-                    this.user = new User(loadedUser[index].id, loadedUser[index].name);
-                }
-            })
+    findByName(inputText: string): Promise<User> {
+        return this.http.get('service/users/'+inputText)
+            .toPromise()
+            .then(response => response.json())
             .catch(error => {
                 this.logService.write('Request failed: ' + error);
             });
-        return this.user;
     }
 
     add(id: number, name: string) {
