@@ -2,11 +2,10 @@ package by.intexsoft.helloworldtomcat.model;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name="users")
 @SuppressWarnings("serial")
-public class User extends AbstractPersistable<Integer> implements UserDetails {
+public class User extends AbstractPersistable<Integer> {
 	
 	/**
 	 * Field stores user name
@@ -56,34 +55,9 @@ public class User extends AbstractPersistable<Integer> implements UserDetails {
 		this.authorities = authorities;
 	}
 
-	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 //        List<GrantedAuthority> grantedAuths = new ArrayList<>();
 //        grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
-		return this.authorities;
-	}
-
-	@JsonIgnore
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@JsonIgnore
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@JsonIgnore
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@JsonIgnore
-	@Override
-	public boolean isEnabled() {
-		return true;
+		return authorities;
 	}
 }
