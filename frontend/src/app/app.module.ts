@@ -9,11 +9,14 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { RouterModule } from "@angular/router";
 import { UserSearchComponent } from "./users/user-search.component";
+import {LoginComponent} from "./login/login.component";
+import {AuthenticationService} from "./authentication/authentication.service";
+import {AuthenticationGuard} from "./guard/authentication.guard";
 
 @NgModule({
     imports: [ AppRoutingModule, RouterModule, BrowserModule, HttpModule, FormsModule ],
-    declarations: [ AppComponent, UsersComponent, UserSearchComponent ],
-    providers: [ UserService, LogService ],
+    declarations: [ AppComponent, UsersComponent, UserSearchComponent, LoginComponent ],
+    providers: [ UserService, LogService, AuthenticationService, AuthenticationGuard ],
     bootstrap: [ AppComponent ]
 })
 

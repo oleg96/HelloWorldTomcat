@@ -13,7 +13,7 @@ export class UsersComponent implements OnInit {
     constructor(private userService: UserService) { }
 
     addItem(id: number, name: string) {
-        this.userService.add(id, name);
+        //this.userService.add(id, name);
     }
 
     findAll() {

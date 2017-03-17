@@ -33,7 +33,7 @@ module.exports = {
 
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['app', 'vendor', 'polyfill']
+            name: ['vendor', 'polyfill']
         }),
 
         new HtmlWebpackPlugin({
@@ -51,7 +51,7 @@ module.exports = {
         contentBase: './src',
         historyApiFallback: true,
         proxy: {
-            '/service/*': 'http://localhost:8080/HelloWorldTomcat/'
+            '/**': 'http://localhost:8080/HelloWorldTomcat'
         },
     }
 };

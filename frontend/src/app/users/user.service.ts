@@ -2,16 +2,21 @@ import { Injectable } from '@angular/core';
 import { User } from '../model/user';
 import { LogService } from '../log/log.service';
 import 'rxjs/add/operator/toPromise';
-import { Http } from "@angular/http";
+import {Http, Headers, RequestOptions} from "@angular/http";
+import {AuthenticationService} from "../authentication/authentication.service";
 
 @Injectable()
 export class UserService {
     private users: User[];
 
-    constructor(private logService: LogService, private http: Http) { }
+    constructor(private logService: LogService, private http: Http, private authenticationService: AuthenticationService) { }
 
     findAll(): Promise<User[]> {
-        return this.http.get('service/users')
+        // add authorization header with jwt token
+        let headers = new Headers({'Content-Type': 'application/json', 'x-auth-token': this.authenticationService.token});
+        let options = new RequestOptions({headers: headers});
+        
+        return this.http.get('service/users', options)
             .toPromise()
             .then(response => response.json())
             .catch(error => {
@@ -28,8 +33,8 @@ export class UserService {
             });
     }
 
-    add(id: number, name: string) {
-        this.users.push(new User(id, name));
-        this.logService.write("Added user: "+id+" "+name);
-    }
+    //add(id: number, name: string) {
+        //this.users.push(new User(id, name));
+        //this.logService.write("Added user: "+id+" "+name);
+    //}
 }

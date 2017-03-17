@@ -6,12 +6,13 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name="authority")
 public class Authority extends AbstractPersistable<Integer> implements GrantedAuthority {
 
     @Column(name="name")
-    String name;
+    public String name;
 
     @Override
     public String getAuthority() {
