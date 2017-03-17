@@ -1,7 +1,9 @@
 .gradle/
 .idea/
+.settings/
 dist/
 node_modules/
+/.project
 src/**/*.map
 src/**/*.js
 src/app/**/*.map
