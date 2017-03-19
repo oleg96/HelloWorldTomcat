@@ -12,10 +12,11 @@ import { UserSearchComponent } from "./users/user-search.component";
 import {LoginComponent} from "./login/login.component";
 import {AuthenticationService} from "./authentication/authentication.service";
 import {AuthenticationGuard} from "./guard/authentication.guard";
+import {LogoutComponent} from "./logout/logout.component";
 
 @NgModule({
     imports: [ AppRoutingModule, RouterModule, BrowserModule, HttpModule, FormsModule ],
-    declarations: [ AppComponent, UsersComponent, UserSearchComponent, LoginComponent ],
+    declarations: [ AppComponent, UsersComponent, UserSearchComponent, LoginComponent, LogoutComponent ],
     providers: [ UserService, LogService, AuthenticationService, AuthenticationGuard ],
     bootstrap: [ AppComponent ]
 })

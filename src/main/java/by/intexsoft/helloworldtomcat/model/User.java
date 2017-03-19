@@ -56,8 +56,6 @@ public class User extends AbstractPersistable<Integer> {
 	}
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-//        List<GrantedAuthority> grantedAuths = new ArrayList<>();
-//        grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return authorities;
 	}
 }
