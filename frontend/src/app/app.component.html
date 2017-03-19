@@ -4,7 +4,10 @@
             <ul class="nav navbar-nav">
                 <li><a routerLink="/users" routerLinkActive="active">All users</a></li>
                 <li><a routerLink="/search" routerLinkActive="active">Search user</a></li>
-                <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a *ngIf="!auth.canActivate()" routerLink="/login" routerLinkActive="active"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a *ngIf="auth.canActivate()" routerLink="/logout" routerLinkActive="active"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
     </nav>

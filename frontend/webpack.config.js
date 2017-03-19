@@ -51,7 +51,7 @@ module.exports = {
         contentBase: './src',
         historyApiFallback: true,
         proxy: {
-            '/**': 'http://localhost:8080/HelloWorldTomcat'
+            '/**': 'http://localhost:8080/'
         },
     }
 };

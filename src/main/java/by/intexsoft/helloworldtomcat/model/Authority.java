@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name="authority")
 public class Authority extends AbstractPersistable<Integer> implements GrantedAuthority {
 
-    @Column(name="name")
+    @Column
     public String name;
 
     @Override
