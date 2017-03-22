@@ -8,4 +8,3 @@ import '@angular/router';
 import '@angular/forms';
 
 import 'rxjs';
-import 'angular-in-memory-web-api';

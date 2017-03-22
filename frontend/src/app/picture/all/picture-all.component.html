@@ -1,0 +1,24 @@
+<div class="container">
+    <table class="col-xs-12 table table-condensed">
+        <thead>
+            <tr>
+                <th>Picture author</th>
+                <th>Picture name</th>
+                <th>Picture description</th>
+                <th>Picture owner</th>
+                <th>Picture tags</th>
+                <th>Picture image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let picture of pictures">
+                <td>{{picture.author}}</td>
+                <td>{{picture.name}}</td>
+                <td>{{picture.description}}</td>
+                <td>{{picture.owner}}</td>
+                <td>{{picture.tags}}</td>
+                <td><img [src]="picture.image | secureUrl" style="max-width: 100%"/></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
