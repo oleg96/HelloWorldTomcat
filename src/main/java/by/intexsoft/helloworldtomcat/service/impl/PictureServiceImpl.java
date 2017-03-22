@@ -3,9 +3,13 @@ package by.intexsoft.helloworldtomcat.service.impl;
 import by.intexsoft.helloworldtomcat.model.Picture;
 import by.intexsoft.helloworldtomcat.repository.PictureRepository;
 import by.intexsoft.helloworldtomcat.service.PictureService;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 /**
@@ -40,6 +44,20 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     public List<Picture> findAll() {
-        return pictureRepository.findAll();
+        List<Picture> pictures = pictureRepository.findAll();
+        for (Picture picture : pictures) {
+            picture.image = "data:image/jpeg;charset=utf-8;base64,"+Base64.encodeBase64String(getImageData(picture.pathToImage));
+        }
+        return pictures;
+    }
+
+    public byte[] getImageData(String pathToImage) {
+        try {
+            byte[] imageData = Files.readAllBytes(new File(pathToImage).toPath());
+            return imageData;
+        }
+        catch (IOException ex) {
+            return null;
+        }
     }
 }

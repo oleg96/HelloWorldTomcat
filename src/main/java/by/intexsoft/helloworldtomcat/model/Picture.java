@@ -1,10 +1,12 @@
 package by.intexsoft.helloworldtomcat.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Picture entity class
@@ -49,4 +51,7 @@ public class Picture extends AbstractPersistable<Integer> {
      */
     @Column
     public String pathToImage;
+
+    @Transient
+    public String image;
 }
