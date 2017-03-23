@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Picture} from "../../model/picture";
 import {PictureService} from "../picture.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'picture-all-component',
@@ -10,7 +11,9 @@ import {PictureService} from "../picture.service";
 export class PictureAllComponent implements OnInit {
     pictures: Picture[];
 
-    constructor(private pictureService: PictureService) { }
+    constructor(
+        private router: Router,
+        private pictureService: PictureService) { }
 
     findAll() {
         this.pictureService.findAll()

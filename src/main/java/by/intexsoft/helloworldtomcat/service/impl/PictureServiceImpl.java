@@ -32,9 +32,18 @@ public class PictureServiceImpl implements PictureService {
         pictureRepository.delete(id);
     }
 
+
+    public Picture findById(int id) {
+        Picture picture = pictureRepository.findOne(id);
+        picture.image = "data:image/jpeg;charset=utf-8;base64,"+Base64.encodeBase64String(getImageData(picture.pathToImage));
+        return picture;
+    }
+
     @Override
     public Picture findByName(String name) {
-        return pictureRepository.findByName(name);
+        Picture picture = pictureRepository.findByName(name);
+        picture.image = "data:image/jpeg;charset=utf-8;base64,"+Base64.encodeBase64String(getImageData(picture.pathToImage));
+        return picture;
     }
 
     @Override

@@ -21,6 +21,12 @@ public interface PictureService {
      */
     void delete(int id);
     /**
+     * Method search picture in database by id
+     * @param id
+     * @return {@link Picture}
+     */
+    Picture findById(int id);
+    /**
      * Method search picture in database by name
      * @param name
      * @return {@link Picture}

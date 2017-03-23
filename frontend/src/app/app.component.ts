@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthenticationGuard} from "./guard/authentication.guard";
 
 @Component({

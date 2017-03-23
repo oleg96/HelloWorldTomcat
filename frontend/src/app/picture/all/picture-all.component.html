@@ -18,6 +18,7 @@
                 <td>{{picture.owner}}</td>
                 <td>{{picture.tags}}</td>
                 <td><img [src]="picture.image | secureUrl" style="max-width: 100%"/></td>
+                <button class="btn btn-default" [routerLink]="['/pictures', picture.id]">Details</button>
             </tr>
         </tbody>
     </table>

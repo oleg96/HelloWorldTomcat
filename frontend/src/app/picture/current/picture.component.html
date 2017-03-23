@@ -1,0 +1,11 @@
+<div class="container">
+    <ul class="list-group" *ngIf="picture">
+        <img [src]="picture.image | secureUrl" style="display: block; margin: 0 auto;"/>
+        <li class="list-group-item"><b>Picture author:</b> {{picture.author}}</li>
+        <li class="list-group-item"><b>Picture name:</b> {{picture.name}}</li>
+        <li class="list-group-item"><b>Picture description:</b> {{picture.description}}</li>
+        <li class="list-group-item"><b>Picture owner:</b> {{picture.owner}}</li>
+        <li class="list-group-item"><b>Picture tags:</b> {{picture.tags}}</li>
+    </ul>
+    <button class="btn btn-default" (click)="goBack()">Back to picture list</button>
+</div>

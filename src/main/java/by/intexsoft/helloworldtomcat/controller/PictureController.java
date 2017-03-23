@@ -25,7 +25,6 @@ public class PictureController {
 
     /**
      * Method get all pictures in JSON format
-     *
      * @return List<{@link Picture}>
      */
     @RequestMapping("/pictures")
@@ -41,13 +40,29 @@ public class PictureController {
     }
 
     /**
-     * Method get picture in JSON format
-     *
+     * Method get picture by id in JSON format
+     * @param id
+     * @return {@link Picture}
+     */
+    @RequestMapping("/pictures/:{id}")
+    public Picture getPictureById(@PathVariable("id") int id) {
+        LOGGER.info("Start getPicture method");
+        try {
+            Picture picture = pictureService.findById(id);
+            return picture;
+        } catch (NullPointerException e) {
+            LOGGER.error("Exception in getPicture method: " + e.getLocalizedMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Method get picture by name in JSON format
      * @param name
      * @return {@link Picture}
      */
     @RequestMapping("/pictures/{name}")
-    public Picture getPicture(@PathVariable("name") String name) {
+    public Picture getPictureByName(@PathVariable("name") String name) {
         LOGGER.info("Start getPicture method");
         try {
             Picture picture = pictureService.findByName(name);

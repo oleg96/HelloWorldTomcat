@@ -1,6 +1,5 @@
 package by.intexsoft.helloworldtomcat.security.service.impl;
 
-import by.intexsoft.helloworldtomcat.controller.SimpleController;
 import by.intexsoft.helloworldtomcat.model.User;
 import by.intexsoft.helloworldtomcat.model.UserAuthentication;
 import by.intexsoft.helloworldtomcat.security.service.TokenAuthenticationService;

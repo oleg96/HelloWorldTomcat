@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map'
-import {LogService} from "../log/log.service";
 
 @Injectable()
 export class AuthenticationService {
@@ -12,7 +11,6 @@ export class AuthenticationService {
         // set token if saved in local storage
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
-        console.log(this.token);
     }
 
     login(username: string, password: string): Observable<boolean> {
@@ -28,22 +26,16 @@ export class AuthenticationService {
                     localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
 
                     // return true to indicate successful login
-                    //this.logService.write('Login success');
-                    console.log(this.token);
                     return true;
-                } else {
-                    // return false to indicate failed login
-                    //this.logService.write('Error during login');
-
-                    return false;
                 }
+                // return false to indicate failed login
+                return false;
             });
     }
 
     logout(): void {
         // clear token remove user from local storage to log user out
         this.token = null;
-        console.log(this.token);
         localStorage.removeItem('currentUser');
     }
 }

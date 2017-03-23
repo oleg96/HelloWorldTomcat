@@ -40,9 +40,8 @@ public class TokenServiceImpl implements TokenService {
             jwtBuilder.setExpiration(calendar.getTime());
             jwtBuilder.setClaims(tokenData);
             return jwtBuilder.signWith(SignatureAlgorithm.HS512, tokenKey).compact();
-        } else {
-            System.out.println("ERROR");
-            return null;
         }
+        System.out.println("ERROR");
+        return null;
     }
 }
