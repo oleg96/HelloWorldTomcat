@@ -13,9 +13,10 @@ import {LogoutComponent} from "./logout/logout.component";
 import {PictureModule} from "./picture/picture.module";
 import {UserModule} from "./user/user.module";
 import {LocationStrategy, HashLocationStrategy} from "@angular/common";
+import {RegisterModule} from "./register/register.module";
 
 @NgModule({
-    imports: [ AppRoutingModule, RouterModule, BrowserModule, HttpModule, FormsModule, PictureModule, UserModule ],
+    imports: [ AppRoutingModule, RouterModule, BrowserModule, HttpModule, FormsModule, PictureModule, UserModule, RegisterModule ],
     declarations: [ AppComponent, LoginComponent, LogoutComponent ],
     providers: [ LogService, AuthenticationService, AuthenticationGuard, {provide: LocationStrategy, useClass: HashLocationStrategy} ],
     bootstrap: [ AppComponent ]

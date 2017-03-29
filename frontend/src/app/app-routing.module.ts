@@ -7,6 +7,7 @@ import {LogoutComponent} from "./logout/logout.component";
 import {AuthenticationGuard} from "./guard/authentication.guard";
 import {PictureAllComponent} from "./picture/all/picture-all.component";
 import {PictureComponent} from "./picture/current/picture.component";
+import {RegisterComponent} from "./register/register.component";
 
 const routes: Routes = [
     { path: '', redirectTo: '', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: 'pictures/:id', component: PictureComponent },
     { path: 'login', component: LoginComponent },
     { path: 'logout', component: LogoutComponent, canActivate: [AuthenticationGuard] },
+    { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({

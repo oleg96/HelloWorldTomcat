@@ -17,28 +17,27 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 /**
- * Handle requests for authentication operations
- * Works with {@link TokenService}
+ * Handle requests for register operations
  */
 @RestController
-@RequestMapping("/auth")
-public class AuthenticationController {
+public class RegisterController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RegisterController.class);
 
     @Autowired
-    private TokenService tokenService;
+    private RegisterService registerService;
 
     /**
      * Login method
      * Parse income {@link Login} object
      * Find {@link by.intexsoft.helloworldtomcat.model.User} in database by username
      * Generate token from {@link TokenService}
+     *
      * @return {@link String} token
      */
-    @RequestMapping(value="/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> authenticate(@RequestBody String userPass) throws IOException {
-        LOGGER.info("Start authentication");
+        LOGGER.info("Start registration");
         ObjectMapper mapper = new ObjectMapper();
         Login login = mapper.readValue(userPass, Login.class);
         String tokenString = tokenService.generateToken(login.username, login.password);
@@ -46,10 +45,12 @@ public class AuthenticationController {
         token.token = tokenString;
         String tokenJSON = mapper.writeValueAsString(token);
         if (token != null) {
-            LOGGER.info("Authentication successful! Returning token");
+            //TokenDTO response = new TokenDTO();
+            //response.token = token;
+            LOGGER.info("Registration successful");
             return new ResponseEntity<>(tokenJSON, HttpStatus.OK);
         }
-        LOGGER.error("Authentication failed");
-        return new ResponseEntity<>("Authentication failed", HttpStatus.BAD_REQUEST);
+        LOGGER.error("Registration failed");
+        return new ResponseEntity<>("Registration failed", HttpStatus.BAD_REQUEST);
     }
 }
