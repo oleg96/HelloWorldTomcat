@@ -2,7 +2,9 @@ package by.intexsoft.helloworldtomcat.controller;
 
 import by.intexsoft.helloworldtomcat.model.Login;
 import by.intexsoft.helloworldtomcat.model.Token;
+import by.intexsoft.helloworldtomcat.model.User;
 import by.intexsoft.helloworldtomcat.security.service.TokenService;
+import by.intexsoft.helloworldtomcat.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +27,7 @@ public class RegisterController {
     private static final Logger LOGGER = LoggerFactory.getLogger(RegisterController.class);
 
     @Autowired
-    private RegisterService registerService;
+    private UserService userService;
 
     /**
      * Login method
@@ -36,21 +38,21 @@ public class RegisterController {
      * @return {@link String} token
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> authenticate(@RequestBody String userPass) throws IOException {
+    public ResponseEntity<?> register(@RequestBody String userPass) throws IOException {
         LOGGER.info("Start registration");
         ObjectMapper mapper = new ObjectMapper();
         Login login = mapper.readValue(userPass, Login.class);
-        String tokenString = tokenService.generateToken(login.username, login.password);
-        Token token = new Token();
-        token.token = tokenString;
-        String tokenJSON = mapper.writeValueAsString(token);
-        if (token != null) {
-            //TokenDTO response = new TokenDTO();
-            //response.token = token;
-            LOGGER.info("Registration successful");
-            return new ResponseEntity<>(tokenJSON, HttpStatus.OK);
+        User newUser = new User();
+        newUser.name = login.username;
+        newUser.password = login.password;
+        if (userService.findByName(newUser.name) == null) {
+            User addedUser = userService.add(newUser);
+            if (addedUser != null) {
+                LOGGER.info("Registration successful");
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
         }
         LOGGER.error("Registration failed");
-        return new ResponseEntity<>("Registration failed", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

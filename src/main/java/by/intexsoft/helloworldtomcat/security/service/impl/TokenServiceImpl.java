@@ -28,7 +28,7 @@ public class TokenServiceImpl implements TokenService {
             return null;
         User user = userService.findByName(username);
         Map<String, Object> tokenData = new HashMap<>();
-        if (password.equals(user.getPassword())) {
+        if (user != null && password.equals(user.getPassword())) {
             tokenData.put("clientType", "user");
             tokenData.put("userID", user.getId());
             tokenData.put("username", user.getUsername());
@@ -41,7 +41,7 @@ public class TokenServiceImpl implements TokenService {
             jwtBuilder.setClaims(tokenData);
             return jwtBuilder.signWith(SignatureAlgorithm.HS512, tokenKey).compact();
         }
-        System.out.println("ERROR");
+        System.out.println("Error during token generation");
         return null;
     }
 }

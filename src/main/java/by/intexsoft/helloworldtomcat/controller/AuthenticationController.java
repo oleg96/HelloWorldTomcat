@@ -45,7 +45,7 @@ public class AuthenticationController {
         Token token = new Token();
         token.token = tokenString;
         String tokenJSON = mapper.writeValueAsString(token);
-        if (token != null) {
+        if (tokenString != null) {
             LOGGER.info("Authentication successful! Returning token");
             return new ResponseEntity<>(tokenJSON, HttpStatus.OK);
         }

@@ -47,6 +47,8 @@ module.exports = {
         }),
     ],
 
+    devtool: "source-map",
+
     devServer: {
         contentBase: './src',
         historyApiFallback: true,

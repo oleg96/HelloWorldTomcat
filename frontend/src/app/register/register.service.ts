@@ -11,10 +11,13 @@ export class RegisterService {
     register(username: string, password: string): Observable<boolean> {
         return this.http.post('register/', JSON.stringify({ username: username, password: password }))
             .map((response: Response) => {
-                let result = response.json() && response.json().result;
+                console.log(response);
+                let result = response.ok;
                 if (result) {
+                    console.log(result);
                     return true;
                 }
+                console.log(result);
                 return false;
             });
     }

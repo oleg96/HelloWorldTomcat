@@ -30,7 +30,12 @@ export class AuthenticationService {
                 }
                 // return false to indicate failed login
                 return false;
-            });
+            })
+            .catch(this.handleServerError);
+    }
+
+    private handleServerError(error: Response) {
+        return Observable.throw(false);
     }
 
     logout(): void {

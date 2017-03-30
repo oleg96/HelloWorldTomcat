@@ -1,6 +1,6 @@
 <div class="container">
     <ul class="list-group" *ngIf="picture">
-        <img [src]="picture.image | secureUrl" style="display: block; margin: 0 auto;"/>
+        <img [src]="picture.image | secureUrl" style="width: 100%"/>
         <li class="list-group-item"><b>Picture author:</b> {{picture.author}}</li>
         <li class="list-group-item"><b>Picture name:</b> {{picture.name}}</li>
         <li class="list-group-item"><b>Picture description:</b> {{picture.description}}</li>
