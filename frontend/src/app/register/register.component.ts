@@ -24,12 +24,16 @@ export class RegisterComponent {
         }
         else this.registerService.register(this.reg.username, this.reg.password)
             .subscribe(result => {
-                if (result === true) {
-                    this.router.navigate(['/']);
-                } else {
+                    if (result === true) {
+                        this.router.navigate(['/']);
+                    } else {
+                        this.error = 'Error while registering';
+                        this.loading = false;
+                    }
+                },
+                error => {
                     this.error = 'Error while registering';
                     this.loading = false;
-                }
-            });
+                });
     }
 }

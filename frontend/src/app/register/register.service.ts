@@ -19,6 +19,11 @@ export class RegisterService {
                 }
                 console.log(result);
                 return false;
-            });
+            })
+            .catch(this.handleServerError);
+    }
+
+    private handleServerError(error: Response) {
+        return Observable.throw(error.json());
     }
 }

@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/picture/pictures/**").permitAll()
+                .antMatchers("/", "/picture/pictures/**", "/register").permitAll()
                 .antMatchers(HttpMethod.GET, "/service/users").hasAuthority("ROLE_ADMIN")
                 .and()
                 .addFilterBefore(new AuthenticationTokenFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class)
