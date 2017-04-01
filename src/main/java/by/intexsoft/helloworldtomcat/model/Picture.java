@@ -1,8 +1,5 @@
 package by.intexsoft.helloworldtomcat.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,8 +10,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name="picture")
-@SuppressWarnings("serial")
-public class Picture extends AbstractPersistable<Integer> {
+public class Picture extends Base {
 
     /**
      * Field stores picture author
@@ -52,6 +48,9 @@ public class Picture extends AbstractPersistable<Integer> {
     @Column
     public String pathToImage;
 
+    /**
+     * Field stores image base64 data
+     */
     @Transient
     public String image;
 }

@@ -3,6 +3,7 @@ package by.intexsoft.helloworldtomcat.service.impl;
 import java.util.*;
 
 import by.intexsoft.helloworldtomcat.model.Authority;
+import by.intexsoft.helloworldtomcat.repository.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,12 +21,13 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private AuthorityRepository roleRepository;
+
 	@Override
 	public User add(User user) {
-		Authority authority = new Authority();
-		authority.setName("ROLE_USER");
-		user.setAuthorities(Arrays.asList(authority));
-		User savedUser = userRepository.saveAndFlush(user);
+		user.setAuthorities(Arrays.asList(roleRepository.findByName("ROLE_USER")));
+		User savedUser = userRepository.save(user);
 		return savedUser;
 	}
 	

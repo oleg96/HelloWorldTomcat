@@ -1,16 +1,22 @@
 package by.intexsoft.helloworldtomcat.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-@SuppressWarnings("serial")
+/**
+ * Authority entity class
+ */
 @Entity
-@Table(name="authority")
-public class Authority extends AbstractPersistable<Integer> implements GrantedAuthority {
+@Table(name = "authority")
+public class Authority extends Base implements GrantedAuthority {
 
+    /**
+     * Field stores authority name
+     */
     @Column
     public String name;
 

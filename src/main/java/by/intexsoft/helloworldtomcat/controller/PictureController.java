@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * Main controller for application
+ * Picture controller for application
  */
 @RestController
 @RequestMapping("/picture")

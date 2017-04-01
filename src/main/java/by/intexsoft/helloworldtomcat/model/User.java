@@ -1,11 +1,8 @@
 package by.intexsoft.helloworldtomcat.model;
 
-import javax.persistence.*;
-
-import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,9 +11,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="users")
-@SuppressWarnings("serial")
-public class User extends AbstractPersistable<Integer> {
-	
+public class User extends Base {
+
 	/**
 	 * Field stores user name
 	 */
@@ -45,7 +41,7 @@ public class User extends AbstractPersistable<Integer> {
 		this.password = password;
 	}
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(targetEntity = Authority.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_authority",
 			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
