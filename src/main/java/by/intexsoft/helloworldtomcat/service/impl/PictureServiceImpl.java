@@ -4,6 +4,7 @@ import by.intexsoft.helloworldtomcat.model.Picture;
 import by.intexsoft.helloworldtomcat.repository.PictureRepository;
 import by.intexsoft.helloworldtomcat.service.PictureService;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,7 +63,7 @@ public class PictureServiceImpl implements PictureService {
 
     public byte[] getImageData(String pathToImage) {
         try {
-            byte[] imageData = Files.readAllBytes(new File(pathToImage).toPath());
+            byte[] imageData = IOUtils.toByteArray(getClass().getClassLoader().getResourceAsStream(pathToImage));
             return imageData;
         }
         catch (IOException ex) {
