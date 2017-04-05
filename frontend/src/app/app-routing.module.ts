@@ -6,7 +6,7 @@ import {LoginComponent} from "./login/login.component";
 import {LogoutComponent} from "./logout/logout.component";
 import {AuthenticationGuard} from "./guard/authentication.guard";
 import {PictureAllComponent} from "./picture/all/picture-all.component";
-import {PictureComponent} from "./picture/current/picture.component";
+import {PictureComponent} from "./picture/details/picture-details.component";
 import {RegisterComponent} from "./register/register.component";
 
 const routes: Routes = [

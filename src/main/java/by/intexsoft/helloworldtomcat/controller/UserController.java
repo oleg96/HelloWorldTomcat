@@ -1,12 +1,16 @@
 package by.intexsoft.helloworldtomcat.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import by.intexsoft.helloworldtomcat.model.Login;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import by.intexsoft.helloworldtomcat.model.User;
 import by.intexsoft.helloworldtomcat.service.UserService;
 
@@ -14,23 +18,36 @@ import by.intexsoft.helloworldtomcat.service.UserService;
  * User controller for application
  */
 @RestController
-@RequestMapping("/service")
+@RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-	
+
 	/**
-	 * Method get simple hello world message
-	 * @return helloMessage
+	 * Register method
+	 * Parse income {@link Login} object
+	 * Add {@link by.intexsoft.helloworldtomcat.model.User} do database if not exists
 	 */
-	@RequestMapping(value="/hello", produces="text/html;charset=UTF-8")
-	public String getHelloMessage() {
-		LOGGER.info("Start hello method");
-		String helloMessage = "Привет мир! Меня написал Олег";
-		return helloMessage;
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ResponseEntity<?> register(@RequestBody String userPass) throws IOException {
+		LOGGER.info("Start registration");
+		ObjectMapper mapper = new ObjectMapper();
+		Login login = mapper.readValue(userPass, Login.class);
+		User newUser = new User();
+		newUser.name = login.username;
+		newUser.password = login.password;
+		if (userService.findByName(newUser.name) == null) {
+			User addedUser = userService.add(newUser);
+			if (addedUser != null) {
+				LOGGER.info("Registration successful");
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
+		}
+		LOGGER.error("Registration failed");
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
 	/**

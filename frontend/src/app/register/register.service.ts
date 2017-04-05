@@ -9,7 +9,7 @@ export class RegisterService {
     constructor(private http: Http) { }
 
     register(username: string, password: string): Observable<boolean> {
-        return this.http.post('register/', JSON.stringify({ username: username, password: password }))
+        return this.http.post('user/register/', JSON.stringify({ username: username, password: password }))
             .map((response: Response) => {
                 console.log(response);
                 let result = response.ok;

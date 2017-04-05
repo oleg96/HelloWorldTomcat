@@ -5,8 +5,8 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {Location} from '@angular/common';
 
 @Component({
-    selector: 'picture-component',
-    templateUrl: 'picture.component.html',
+    selector: 'picture-details-component',
+    templateUrl: 'picture-details.component.html',
 })
 
 export class PictureComponent implements OnInit {

@@ -8,9 +8,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 
 /**
@@ -24,7 +22,7 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     public Picture add(Picture picture) {
-        Picture savedPicture = pictureRepository.saveAndFlush(picture);
+        Picture savedPicture = pictureRepository.save(picture);
         return savedPicture;
     }
 
