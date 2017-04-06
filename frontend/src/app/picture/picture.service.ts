@@ -9,6 +9,13 @@ export class PictureService {
 
     constructor(private logService: LogService, private http: Http) { }
 
+    add(fileToUpload: any) {
+        let input = new FormData();
+        input.append("file", fileToUpload);
+        return this.http
+            .post("/picture/add", input);
+    }
+
     findAll(): Promise<Picture[]> {
         return this.http.get('picture/pictures')
             .toPromise()

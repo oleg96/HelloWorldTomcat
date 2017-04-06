@@ -8,11 +8,13 @@ import {AuthenticationGuard} from "./guard/authentication.guard";
 import {PictureAllComponent} from "./picture/all/picture-all.component";
 import {PictureComponent} from "./picture/details/picture-details.component";
 import {RegisterComponent} from "./register/register.component";
+import {PictureAddComponent} from "./picture/add/picture-add.component";
 
 const routes: Routes = [
     { path: '', redirectTo: '', pathMatch: 'full' },
     { path: 'users', component: UserComponent },
     { path: 'search', component: UserSearchComponent },
+    { path: 'pictures/add', component: PictureAddComponent },
     { path: 'pictures/all', component: PictureAllComponent },
     { path: 'pictures/:id', component: PictureComponent },
     { path: 'login', component: LoginComponent },

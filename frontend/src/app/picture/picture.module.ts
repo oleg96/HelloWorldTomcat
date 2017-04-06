@@ -7,10 +7,11 @@ import {PictureAllComponent} from "./all/picture-all.component";
 import {PictureComponent} from "./details/picture-details.component";
 import {SecureUrlPipe} from "./secure-url.pipe";
 import {PictureService} from "./picture.service";
+import {PictureAddComponent} from "./add/picture-add.component";
 
 @NgModule({
     imports: [ AppRoutingModule, BrowserModule, HttpModule, FormsModule ],
-    declarations: [ PictureAllComponent, PictureComponent, SecureUrlPipe ],
+    declarations: [ PictureAddComponent, PictureAllComponent, PictureComponent, SecureUrlPipe ],
     providers: [ PictureService ]
 })
 
