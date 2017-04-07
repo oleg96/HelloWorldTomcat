@@ -24,7 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/picture/pictures/**", "/register").permitAll()
-                .antMatchers(HttpMethod.GET, "/service/users").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.POST, "/picture/add").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.GET, "/user/users").hasAuthority("ROLE_ADMIN")
                 .and()
                 .addFilterBefore(new AuthenticationTokenFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

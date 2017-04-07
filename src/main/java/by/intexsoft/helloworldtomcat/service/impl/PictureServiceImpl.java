@@ -34,14 +34,12 @@ public class PictureServiceImpl implements PictureService {
 
     public Picture findById(int id) {
         Picture picture = pictureRepository.findOne(id);
-        picture.image = "data:image/jpeg;charset=utf-8;base64,"+Base64.encodeBase64String(getImageData(picture.pathToImage));
         return picture;
     }
 
     @Override
     public Picture findByName(String name) {
         Picture picture = pictureRepository.findByName(name);
-        picture.image = "data:image/jpeg;charset=utf-8;base64,"+Base64.encodeBase64String(getImageData(picture.pathToImage));
         return picture;
     }
 
@@ -53,19 +51,6 @@ public class PictureServiceImpl implements PictureService {
     @Override
     public List<Picture> findAll() {
         List<Picture> pictures = pictureRepository.findAll();
-        for (Picture picture : pictures) {
-            picture.image = "data:image/jpeg;charset=utf-8;base64,"+Base64.encodeBase64String(getImageData(picture.pathToImage));
-        }
         return pictures;
-    }
-
-    public byte[] getImageData(String pathToImage) {
-        try {
-            byte[] imageData = IOUtils.toByteArray(getClass().getClassLoader().getResourceAsStream(pathToImage));
-            return imageData;
-        }
-        catch (IOException ex) {
-            return null;
-        }
     }
 }

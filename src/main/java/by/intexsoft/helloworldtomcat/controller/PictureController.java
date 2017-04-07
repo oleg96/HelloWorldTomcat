@@ -2,13 +2,18 @@ package by.intexsoft.helloworldtomcat.controller;
 
 import by.intexsoft.helloworldtomcat.model.Picture;
 import by.intexsoft.helloworldtomcat.service.PictureService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -22,6 +27,33 @@ public class PictureController {
     private PictureService pictureService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PictureController.class);
+
+    /**
+     * Method add <{@link Picture}> into database
+     * @return List<{@link Picture}>
+     */
+    @RequestMapping("/add")
+    public ResponseEntity<?> add(@RequestBody String data) throws IOException {
+        LOGGER.info("Start add picture");
+        ObjectMapper mapper = new ObjectMapper();
+        Picture picture = mapper.readValue(data, Picture.class);
+        Picture newPicture = new Picture();
+        newPicture.author = picture.author;
+        newPicture.name = picture.name;
+        newPicture.description = picture.description;
+        newPicture.owner = picture.owner;
+        newPicture.tags = picture.tags;
+        newPicture.image = picture.image;
+        if (pictureService.findByName(newPicture.name) == null) {
+            Picture addedPicture = pictureService.add(newPicture);
+            if (addedPicture != null) {
+                LOGGER.info("Adding picture successful");
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+        }
+        LOGGER.error("Adding picture failed");
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 
     /**
      * Method get all pictures in JSON format

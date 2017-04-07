@@ -1,5 +1,5 @@
-import { Component, NgZone, Inject, EventEmitter } from '@angular/core';
-import { NgUploaderOptions, UploadedFile, UploadRejected } from 'ngx-uploader';
+import {Component, NgZone, Inject, EventEmitter} from '@angular/core';
+import {NgUploaderOptions, UploadedFile, UploadRejected} from 'ngx-uploader';
 
 @Component({
     selector: 'picture-add-component',
@@ -8,7 +8,7 @@ import { NgUploaderOptions, UploadedFile, UploadRejected } from 'ngx-uploader';
 export class PictureAddComponent {
     picture: any = {};
     loading = false;
-    error = '';
+    error: string;
     options: NgUploaderOptions;
     response: any;
     sizeLimit: number = 1000000; // 1MB
@@ -17,12 +17,17 @@ export class PictureAddComponent {
 
     constructor(@Inject(NgZone) private zone: NgZone) {
         this.options = new NgUploaderOptions({
-            url: 'http://api.ngx-uploader.com/upload',
+            url: 'picture/add',
             filterExtensions: true,
             allowedExtensions: ['jpg', 'png'],
             maxSize: 2097152,
-            data: { userId: 12 },
+            data: {},
+            customHeaders: {
+                'Content-Type':'application/json',
+                'Accept':'application/json'
+            },
             autoUpload: false,
+            plainJson: true,
             fieldName: 'file',
             fieldReset: true,
             maxUploads: 2,
@@ -36,6 +41,12 @@ export class PictureAddComponent {
 
     startUpload() {
         this.loading = true;
+        this.options['data']['author'] = this.picture.author;
+        this.options['data']['name'] = this.picture.name;
+        this.options['data']['description'] = this.picture.description;
+        this.options['data']['owner'] = "Oleg";
+        this.options['data']['tags'] = this.picture.tags;
+        this.options['data']['image'] = this.previewData;
         this.inputUploadEvents.emit('startUpload');
     }
 
@@ -46,14 +57,10 @@ export class PictureAddComponent {
         }
     }
 
-    handleUpload(data: any) {
-        setTimeout(() => {
-            this.zone.run(() => {
-                this.response = data;
-                if (data && data.response) {
-                    this.response = JSON.parse(data.response);
-                }
-            });
+    handleUpload(data: any): void {
+        this.zone.run(() => {
+            this.response = data;
+            this.loading = false;
         });
     }
 

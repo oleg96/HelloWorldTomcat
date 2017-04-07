@@ -3,48 +3,46 @@
     <form name="form" (ngSubmit)="f.form.valid && startUpload()" #f="ngForm" novalidate>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !author.valid }">
             <label for="author">Author</label>
-            <input type="text" class="form-control" name="author" [(ngModel)]="picture.author" #author="ngModel" required />
+            <input type="text" class="form-control" name="author" [(ngModel)]="picture.author" #author="ngModel"
+                   required/>
             <div *ngIf="f.submitted && !author.valid" class="help-block">Author is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
             <label for="name">Name</label>
-            <input type="text" class="form-control" name="name" [(ngModel)]="picture.name" #name="ngModel" required />
+            <input type="text" class="form-control" name="name" [(ngModel)]="picture.name" #name="ngModel" required/>
             <div *ngIf="f.submitted && !name.valid" class="help-block">Name is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !description.valid }">
             <label for="description">Description</label>
-            <input type="textarea" class="form-control" name="description" [(ngModel)]="picture.description" #description="ngModel" required />
+            <input type="textarea" class="form-control" name="description" [(ngModel)]="picture.description"
+                   #description="ngModel" required/>
             <div *ngIf="f.submitted && !description.valid" class="help-block">Description is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !tags.valid }">
             <label for="tags">Tags</label>
-            <input type="text" class="form-control" name="tags" [(ngModel)]="picture.tags" #tags="ngModel" required />
+            <input type="text" class="form-control" name="tags" [(ngModel)]="picture.tags" #tags="ngModel" required/>
             <div *ngIf="f.submitted && !tags.valid" class="help-block">Tags is required</div>
         </div>
-        <div class="button-container">
-            <input type="file"
-                   ngFileSelect
-                   [options]="options"
-                   [events]="inputUploadEvents"
-                   (onUpload)="handleUpload($event)"
-                   (onPreviewData)="handlePreviewData($event)"
-                   (beforeUpload)="beforeUpload($event)">
-        </div>
+        <input type="file"
+               ngFileSelect
+               [options]="options"
+               [events]="inputUploadEvents"
+               (onUpload)="handleUpload($event)"
+               (onPreviewData)="handlePreviewData($event)"
+               (beforeUpload)="beforeUpload($event)">
         <p>
             Allowed extensions: <code><b>.jpg</b>, <b>.png</b></code>
         </p>
-        <div>
-            <button type="button" class="start-upload-button" (click)="startUpload()">Start Upload</button>
-        </div>
         <div *ngIf="response">
             <pre><code></code></pre>
         </div>
         <div *ngIf="previewData && !response">
-            <img style="width: 100%" [src]="previewData">
+            <img style="width: 50%" [src]="previewData">
         </div>
         <div class="form-group">
             <button [disabled]="loading" class="btn btn-primary">Add</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <img *ngIf="loading"
+                 src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
         </div>
         <div *ngIf="error" class="alert alert-danger">{{error}}</div>
     </form>

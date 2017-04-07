@@ -43,14 +43,8 @@ public class Picture extends Base {
     public String tags;
 
     /**
-     * Field stores path to image
-     */
-    @Column
-    public String pathToImage;
-
-    /**
      * Field stores image base64 data
      */
-    @Transient
+    @Column
     public String image;
 }
