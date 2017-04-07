@@ -3,18 +3,12 @@ import {LogService} from '../log/log.service';
 import 'rxjs/add/operator/toPromise';
 import {Http} from "@angular/http";
 import {Picture} from "../model/picture";
+import {AuthenticationService} from "../authentication/authentication.service";
 
 @Injectable()
 export class PictureService {
 
-    constructor(private logService: LogService, private http: Http) { }
-
-    add(fileToUpload: any) {
-        let input = new FormData();
-        input.append("file", fileToUpload);
-        return this.http
-            .post("/picture/add", input);
-    }
+    constructor(private logService: LogService, private http: Http, private authenticationService: AuthenticationService) { }
 
     findAll(): Promise<Picture[]> {
         return this.http.get('picture/pictures')

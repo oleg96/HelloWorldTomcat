@@ -1,5 +1,6 @@
 import {Component, NgZone, Inject, EventEmitter} from '@angular/core';
 import {NgUploaderOptions, UploadedFile, UploadRejected} from 'ngx-uploader';
+import {AuthenticationService} from "../../authentication/authentication.service";
 
 @Component({
     selector: 'picture-add-component',
@@ -15,7 +16,7 @@ export class PictureAddComponent {
     previewData: any;
     inputUploadEvents: EventEmitter<string>;
 
-    constructor(@Inject(NgZone) private zone: NgZone) {
+    constructor(@Inject(NgZone) private zone: NgZone, private authenticationService: AuthenticationService) {
         this.options = new NgUploaderOptions({
             url: 'picture/add',
             filterExtensions: true,
@@ -24,7 +25,8 @@ export class PictureAddComponent {
             data: {},
             customHeaders: {
                 'Content-Type':'application/json',
-                'Accept':'application/json'
+                'Accept':'application/json',
+                'x-auth-token':authenticationService.token
             },
             autoUpload: false,
             plainJson: true,
