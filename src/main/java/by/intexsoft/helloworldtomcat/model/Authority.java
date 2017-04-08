@@ -20,17 +20,12 @@ public class Authority extends Base implements GrantedAuthority {
     @Column
     public String name;
 
+    /**
+     * Implemented method to get Authority name
+     * @return name
+     */
     @Override
     public String getAuthority() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JsonIgnore
-    public String getName() {
         return name;
     }
 }

@@ -4,6 +4,7 @@ import {AdminComponent} from "./admin.component";
 import {UserComponent} from "../user/all/user.component";
 import {UserSearchComponent} from "../user/search/user-search.component";
 import {PictureAddComponent} from "../picture/add/picture-add.component";
+import {UserEditComponent} from "../user/edit/user-edit.component";
 
 const routes: Routes = [
     {
@@ -12,6 +13,7 @@ const routes: Routes = [
             {path: 'users', component: UserComponent},
             {path: 'search', component: UserSearchComponent},
             {path: 'picture/add', component: PictureAddComponent},
+            {path: 'user/edit/:id', component: UserEditComponent},
         ]
     },
 ];

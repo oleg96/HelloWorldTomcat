@@ -14,11 +14,12 @@ import {PictureModule} from "./picture/picture.module";
 import {LocationStrategy, HashLocationStrategy} from "@angular/common";
 import {RegisterModule} from "./register/register.module";
 import {AdminModule} from "./admin/admin.module";
+import {AuthorityComponent} from "./authority/authority.component";
 
 @NgModule({
     imports: [ AppRoutingModule, RouterModule, BrowserModule, HttpModule, FormsModule, PictureModule, RegisterModule, AdminModule ],
     declarations: [ AppComponent, LoginComponent, LogoutComponent ],
-    providers: [ LogService, AuthenticationService, AuthenticationGuard, {provide: LocationStrategy, useClass: HashLocationStrategy} ],
+    providers: [ LogService, AuthenticationService, AuthenticationGuard, AuthorityComponent, {provide: LocationStrategy, useClass: HashLocationStrategy} ],
     bootstrap: [ AppComponent ]
 })
 

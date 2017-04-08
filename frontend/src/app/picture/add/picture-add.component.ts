@@ -1,6 +1,7 @@
-import {Component, NgZone, Inject, EventEmitter} from '@angular/core';
-import {NgUploaderOptions, UploadedFile, UploadRejected} from 'ngx-uploader';
-import {AuthenticationService} from "../../authentication/authentication.service";
+import {Component, EventEmitter, Inject, NgZone} from "@angular/core";
+import {NgUploaderOptions, UploadedFile} from "ngx-uploader";
+import {User} from "../../model/user";
+import {AuthorityComponent} from "../../authority/authority.component";
 
 @Component({
     selector: 'picture-add-component',
@@ -15,8 +16,9 @@ export class PictureAddComponent {
     sizeLimit: number = 1000000; // 1MB
     previewData: any;
     inputUploadEvents: EventEmitter<string>;
+    user: User = AuthorityComponent.getCurrentUser();
 
-    constructor(@Inject(NgZone) private zone: NgZone, private authenticationService: AuthenticationService) {
+    constructor(@Inject(NgZone) private zone: NgZone) {
         this.options = new NgUploaderOptions({
             url: 'picture/add',
             filterExtensions: true,
@@ -26,7 +28,7 @@ export class PictureAddComponent {
             customHeaders: {
                 'Content-Type':'application/json',
                 'Accept':'application/json',
-                'x-auth-token':authenticationService.token
+                'x-auth-token':this.user.token
             },
             autoUpload: false,
             plainJson: true,

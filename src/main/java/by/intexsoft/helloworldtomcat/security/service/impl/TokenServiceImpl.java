@@ -28,10 +28,10 @@ public class TokenServiceImpl implements TokenService {
             return null;
         User user = userService.findByName(username);
         Map<String, Object> tokenData = new HashMap<>();
-        if (user != null && password.equals(user.getPassword())) {
+        if (user != null && password.equals(user.password)) {
             tokenData.put("clientType", "user");
             tokenData.put("userID", user.id);
-            tokenData.put("username", user.getUsername());
+            tokenData.put("username", user.name);
             tokenData.put("token_create_date", LocalDateTime.now());
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.MINUTE, 60);

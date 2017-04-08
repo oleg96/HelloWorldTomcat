@@ -1,9 +1,9 @@
 package by.intexsoft.helloworldtomcat.controller;
 
-import by.intexsoft.helloworldtomcat.model.Login;
 import by.intexsoft.helloworldtomcat.model.Token;
+import by.intexsoft.helloworldtomcat.model.User;
 import by.intexsoft.helloworldtomcat.security.service.TokenService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import by.intexsoft.helloworldtomcat.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 /**
  * Handle requests for authentication operations
@@ -29,25 +32,27 @@ public class AuthenticationController {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * Login method
-     * Parse income {@link Login} object
      * Find {@link by.intexsoft.helloworldtomcat.model.User} in database by username
      * Generate token from {@link TokenService}
+     *
      * @return {@link String} token
      */
-    @RequestMapping(value="/login", method = RequestMethod.POST)
-    public ResponseEntity<?> authenticate(@RequestBody String userPass) throws IOException {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<?> authenticate(@RequestBody User requestUser) throws IOException {
         LOGGER.info("Start authentication");
-        ObjectMapper mapper = new ObjectMapper();
-        Login login = mapper.readValue(userPass, Login.class);
-        String tokenString = tokenService.generateToken(login.username, login.password);
-        Token token = new Token();
-        token.token = tokenString;
-        String tokenJSON = mapper.writeValueAsString(token);
-        if (tokenString != null) {
-            LOGGER.info("Authentication successful! Returning token");
-            return new ResponseEntity<>(tokenJSON, HttpStatus.OK);
+        if (isNotEmpty(requestUser.name) && isNotEmpty(requestUser.password)) {
+            User user = userService.findByName(requestUser.name);
+            String token = tokenService.generateToken(user.name, requestUser.password);
+            if (token != null) {
+                LOGGER.info("Authentication successful! Returning token");
+                user.password = EMPTY;
+                return new ResponseEntity<>(new Token(token, user), HttpStatus.OK);
+            }
         }
         LOGGER.error("Authentication failed");
         return new ResponseEntity<>("Authentication failed", HttpStatus.BAD_REQUEST);

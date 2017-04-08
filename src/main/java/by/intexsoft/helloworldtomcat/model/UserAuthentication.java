@@ -19,7 +19,7 @@ public class UserAuthentication implements Authentication {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getAuthorities();
+        return user.authorities;
     }
 
     @Override
@@ -50,9 +50,5 @@ public class UserAuthentication implements Authentication {
     @Override
     public String getName() {
         return user.name;
-    }
-
-    public User getUser() {
-        return user;
     }
 }

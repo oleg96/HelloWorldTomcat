@@ -1,24 +1,25 @@
-import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
-import {Observable} from 'rxjs';
-import 'rxjs/add/operator/map'
+import {Injectable} from "@angular/core";
+import {Headers, Http, RequestOptions, Response} from "@angular/http";
+import {Observable} from "rxjs";
+import "rxjs/add/operator/map";
+import {User} from "../model/user";
 
 @Injectable()
 export class AuthenticationService {
-    public token: string;
 
     constructor(private http: Http) {
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.token = currentUser && currentUser.token;
     }
 
-    login(username: string, password: string): Observable<boolean> {
-        return this.http.post('auth/login', JSON.stringify({ username: username, password: password }))
+    login(user: User): Observable<boolean> {
+        const body = JSON.stringify({name: user.name, password: user.password});
+        const options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
+        return this.http.post('auth/login', body, options)
             .map((response: Response) => {
-                let token = response.json() && response.json().token;
-                if (token) {
-                    this.token = token;
-                    localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
+                let token = response.json().token;
+                let user = response.json().user;
+                if (token && user) {
+                    user.token = token;
+                    localStorage.setItem('currentUser', JSON.stringify(user));
                     return true;
                 }
                 return false;
@@ -31,7 +32,6 @@ export class AuthenticationService {
     }
 
     logout(): void {
-        this.token = null;
         localStorage.removeItem('currentUser');
     }
 }

@@ -12,16 +12,17 @@ import {PictureAddComponent} from "./picture/add/picture-add.component";
 import {AdminComponent} from "./admin/admin.component";
 
 const routes: Routes = [
-    { path: '', redirectTo: '', pathMatch: 'full' },
-    { path: 'pictures/all', component: PictureAllComponent },
-    { path: 'pictures/:id', component: PictureComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'logout', component: LogoutComponent, canActivate: [AuthenticationGuard] },
-    { path: 'register', component: RegisterComponent },
+    {path: '', redirectTo: '', pathMatch: 'full'},
+    {path: 'pictures/all', component: PictureAllComponent},
+    {path: 'pictures/:id', component: PictureComponent},
+    {path: 'login', component: LoginComponent},
+    {path: 'logout', component: LogoutComponent, canActivate: [AuthenticationGuard]},
+    {path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

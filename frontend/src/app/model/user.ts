@@ -1,5 +1,13 @@
+import {Authority} from "./authority";
 export class User {
-    username: string;
+    id: number;
+    name: string;
     password: string;
-    constructor(username: string, password: string) { }
+    authorities: Authority[];
+    token: string;
+
+    constructor(name: string, password: string) {
+        this.name = name;
+        this.password = password;
+    }
 }

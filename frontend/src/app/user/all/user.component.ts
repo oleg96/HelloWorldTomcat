@@ -12,10 +12,6 @@ export class UserComponent implements OnInit {
 
     constructor(private userService: UserService) { }
 
-    addItem(id: number, name: string) {
-        //this.userService.add(id, name);
-    }
-
     findAll() {
         this.userService.findAll()
             .then(usersFromService => this.users = usersFromService);

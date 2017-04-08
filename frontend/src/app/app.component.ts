@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthenticationGuard} from "./guard/authentication.guard";
+import {AuthorityComponent} from "./authority/authority.component";
 
 @Component({
     selector: 'app',
@@ -7,5 +8,5 @@ import {AuthenticationGuard} from "./guard/authentication.guard";
 })
 export class AppComponent {
 
-    constructor(public auth: AuthenticationGuard) { }
+    constructor(public auth: AuthenticationGuard, public authority: AuthorityComponent) { }
 }

@@ -1,16 +1,14 @@
 package by.intexsoft.helloworldtomcat.service.impl;
 
-import java.util.*;
-
-import by.intexsoft.helloworldtomcat.model.Authority;
-import by.intexsoft.helloworldtomcat.repository.AuthorityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.stereotype.Service;
 import by.intexsoft.helloworldtomcat.model.User;
+import by.intexsoft.helloworldtomcat.repository.AuthorityRepository;
 import by.intexsoft.helloworldtomcat.repository.UserRepository;
 import by.intexsoft.helloworldtomcat.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Implementation of {@link UserService} interface
@@ -29,6 +27,11 @@ public class UserServiceImpl implements UserService {
 		user.setAuthorities(Arrays.asList(roleRepository.findByName("ROLE_USER")));
 		User savedUser = userRepository.save(user);
 		return savedUser;
+	}
+
+	@Override
+	public User findById(int id) {
+		return userRepository.findOne(id);
 	}
 	
 	@Override

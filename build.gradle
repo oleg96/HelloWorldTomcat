@@ -20,6 +20,7 @@ dependencies {
 	compile 'javax.servlet:javax.servlet-api:3.1.0'
 	compile 'commons-codec:commons-codec:1.10'
 	compile 'commons-io:commons-io:2.5'
+	compile 'org.apache.commons:commons-lang3:3.5'
 }
 
 war.dependsOn 'frontend:npm_run_build'

@@ -22,8 +22,7 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     public Picture add(Picture picture) {
-        Picture savedPicture = pictureRepository.save(picture);
-        return savedPicture;
+        return pictureRepository.save(picture);
     }
 
     @Override
@@ -31,16 +30,14 @@ public class PictureServiceImpl implements PictureService {
         pictureRepository.delete(id);
     }
 
-
+    @Override
     public Picture findById(int id) {
-        Picture picture = pictureRepository.findOne(id);
-        return picture;
+        return pictureRepository.findOne(id);
     }
 
     @Override
     public Picture findByName(String name) {
-        Picture picture = pictureRepository.findByName(name);
-        return picture;
+        return pictureRepository.findByName(name);
     }
 
     @Override
@@ -50,7 +47,6 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     public List<Picture> findAll() {
-        List<Picture> pictures = pictureRepository.findAll();
-        return pictures;
+        return pictureRepository.findAll();
     }
 }

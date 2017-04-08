@@ -20,6 +20,12 @@ public interface UserService {
 	 */
 	void delete(int id);
 	/**
+	 * Method search user in database by id
+	 * @param id
+	 * @return {@link User}
+	 */
+	User findById(int id);
+	/**
 	 * Method search user in database by name
 	 * @param name
 	 * @return {@link User}
