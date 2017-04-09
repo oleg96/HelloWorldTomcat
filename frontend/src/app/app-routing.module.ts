@@ -1,15 +1,11 @@
 import {NgModule} from "@angular/core";
-import {Routes, RouterModule} from "@angular/router";
-import {UserComponent} from "./user/all/user.component";
-import {UserSearchComponent} from "./user/search/user-search.component";
+import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from "./login/login.component";
 import {LogoutComponent} from "./logout/logout.component";
 import {AuthenticationGuard} from "./guard/authentication.guard";
 import {PictureAllComponent} from "./picture/all/picture-all.component";
 import {PictureComponent} from "./picture/details/picture-details.component";
 import {RegisterComponent} from "./register/register.component";
-import {PictureAddComponent} from "./picture/add/picture-add.component";
-import {AdminComponent} from "./admin/admin.component";
 
 const routes: Routes = [
     {path: '', redirectTo: '', pathMatch: 'full'},

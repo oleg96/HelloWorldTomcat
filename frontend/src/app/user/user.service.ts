@@ -5,11 +5,28 @@ import "rxjs/add/operator/toPromise";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {AuthorityComponent} from "../authority/authority.component";
 import {Observable} from "rxjs";
+import {Authority} from "../model/authority";
 
 @Injectable()
 export class UserService {
 
     constructor(private logService: LogService, private http: Http) {
+    }
+
+    findAllRoles(): Promise<Authority[]> {
+        let authUser: User = AuthorityComponent.getCurrentUser();
+        let options = new RequestOptions({
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-auth-token': authUser.token
+            })
+        });
+        return this.http.get('authority/authorities', options)
+            .toPromise()
+            .then(response => response.json())
+            .catch(error => {
+                this.logService.write('Request failed: ' + error);
+            });
     }
 
     findAll(): Promise<User[]> {
@@ -29,6 +46,13 @@ export class UserService {
     }
 
     findByName(inputText: string): Promise<User> {
+        let authUser: User = AuthorityComponent.getCurrentUser();
+        let options = new RequestOptions({
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-auth-token': authUser.token
+            })
+        });
         return this.http.get('user/users/' + inputText)
             .toPromise()
             .then(response => response.json())
@@ -38,6 +62,13 @@ export class UserService {
     }
 
     findById(inputId: number): Promise<User> {
+        let authUser: User = AuthorityComponent.getCurrentUser();
+        let options = new RequestOptions({
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-auth-token': authUser.token
+            })
+        });
         return this.http.get('user/users/:' + inputId)
             .toPromise()
             .then(response => response.json())

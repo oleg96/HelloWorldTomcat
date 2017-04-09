@@ -65,7 +65,24 @@ public class UserController {
 			return null;
 		}
 	}
-	
+
+	/**
+	 * Method get user in JSON format
+	 * @param id
+	 * @return {@link User}
+	 */
+	@RequestMapping("/users/:{id}")
+	public User getUser(@PathVariable("id") int id) {
+		LOGGER.info("Start getUser method");
+		try {
+			User user = userService.findById(id);
+			return user;
+		} catch (NullPointerException e) {
+			LOGGER.error("Exception in getUser method: " + e.getLocalizedMessage());
+			return null;
+		}
+	}
+
 	/**
 	 * Method get user in JSON format
 	 * @param name

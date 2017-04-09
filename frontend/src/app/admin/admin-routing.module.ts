@@ -13,7 +13,7 @@ const routes: Routes = [
             {path: 'users', component: UserComponent},
             {path: 'search', component: UserSearchComponent},
             {path: 'picture/add', component: PictureAddComponent},
-            {path: 'user/edit/:id', component: UserEditComponent},
+            {path: 'users/edit/:id', component: UserEditComponent},
         ]
     },
 ];
