@@ -78,16 +78,13 @@ export class UserService {
     }
 
     edit(user: User): Observable<boolean> {
-        const body = JSON.stringify({name: user.name, password: user.password});
+        const body = JSON.stringify({id: user.id, name: user.name, password: user.password, authorities: user.authorities});
         const options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
         return this.http.post('user/edit', body, options)
             .map((response: Response) => {
-                let result = response.ok;
-                if (result) {
-                    console.log(result);
+                if (response.ok) {
                     return true;
                 }
-                console.log(result);
                 return false;
             })
             .catch(this.handleServerError);

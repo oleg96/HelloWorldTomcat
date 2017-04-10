@@ -11,8 +11,8 @@ import {Authority} from "../../model/authority";
 })
 
 export class UserEditComponent implements OnInit {
-    availableAuthorities: Authority[] = [];
-    selectedAuthorities: Authority[] = [];
+    availableAuthorities: Authority[];
+    selectedAuthorities: Authority[];
     user: User;
     loading = false;
     error = '';
@@ -28,14 +28,8 @@ export class UserEditComponent implements OnInit {
             .switchMap((params: Params) => this.userService.findById(+params['id']))
             .subscribe((user: User) => {
                 this.user = user;
-                this.findAllRoles();
                 this.selectedAuthorities = this.user.authorities;
-                this.selectedAuthorities.forEach(function(val){
-                    var foundIndex = this.availableAuthorities.indexOf(val);
-                    if(foundIndex != -1){
-                        this.availableAuthorities.splice(foundIndex, 1);
-                    }
-                });
+                this.findAvailableRoles();
             });
     }
 
@@ -49,14 +43,24 @@ export class UserEditComponent implements OnInit {
         this.availableAuthorities.push(authority);
     }
 
-    findAllRoles() {
+    findAvailableRoles() {
         this.userService.findAllRoles()
-            .then(userFromService => this.availableAuthorities = userFromService);
+            .then(authoritiesFromService => {
+                this.availableAuthorities = authoritiesFromService;
+                for (var i = 0; i < this.availableAuthorities.length; i++) {
+                    for (var j = 0; j < this.selectedAuthorities.length; j++) {
+                        if (this.selectedAuthorities[j].name == this.availableAuthorities[i].name) {
+                            this.availableAuthorities.splice(i, 1);
+                        }
+                    }
+                }
+            });
     }
 
     edit() {
         this.loading = true;
-        this.userService.edit(new User(this.user.name, this.user.password))
+        this.user.authorities = this.selectedAuthorities;
+        this.userService.edit(this.user)
             .subscribe(result => {
                     if (result === true) {
                         this.router.navigate(['/admin/users']);

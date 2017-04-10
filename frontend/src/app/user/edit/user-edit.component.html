@@ -2,30 +2,34 @@
     <h2>Edit user</h2>
     <form *ngIf="user" name="form" (ngSubmit)="f.form.valid && edit()" #f="ngForm" novalidate>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" name="name" [(ngModel)]="user.name" #name="ngModel" required />
-            <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+            <label for="name">Username</label>
+            <input id="name" type="text" class="form-control" name="name" [(ngModel)]="user.name" #name="ngModel" required/>
+            <div *ngIf="f.submitted && !name.valid" class="help-block">Username is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
             <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel" required />
+            <input id="password" type="password" class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel"
+                   required/>
             <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
         </div>
-        <div class="form-group">
-            <label>Available authorities</label>
-            <ul class="list-group">
-                <li *ngFor="let authority of availableAuthorities" class="list-group-item">{{authority.name}} <button class="btn btn-default" (click)="addAuthority(authority)">Add</button></li>
-            </ul>
-        </div>
-        <div class="form-group">
-            <label>User authorities</label>
-            <ul class="list-group">
-                <li *ngFor="let authority of selectedAuthorities" class="list-group-item">{{authority.name}} <button class="btn btn-default" (click)="removeAuthority(authority)">Remove</button></li>
-            </ul>
-        </div>
+        <label>Available authorities</label>
+        <ul class="list-group" [(ngModel)]="availableAuthorities" name="availableAuthoritiesList" #availableAuthoritiesList="ngModel" ngDefaultControl>
+            <li *ngFor="let availableAuthority of availableAuthorities" value="availableAuthority.name" class="list-group-item">
+                {{availableAuthority.name}}
+                <button class="btn btn-default" (click)="addAuthority(availableAuthority)">Add</button>
+            </li>
+        </ul>
+        <label>User authorities</label>
+        <ul class="list-group" [(ngModel)]="selectedAuthorities" name="selectedAuthoritiesList" #selectedAuthoritiesList="ngModel" ngDefaultControl>
+            <li *ngFor="let selectedAuthority of selectedAuthorities" value="selectedAuthority.name" class="list-group-item">
+                {{selectedAuthority.name}}
+                <button class="btn btn-default" (click)="removeAuthority(selectedAuthority)">Remove</button>
+            </li>
+        </ul>
         <div class="form-group">
             <button [disabled]="loading" class="btn btn-primary">Edit</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <img *ngIf="loading"
+                 src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
         </div>
         <div *ngIf="error" class="alert alert-danger">{{error}}</div>
     </form>

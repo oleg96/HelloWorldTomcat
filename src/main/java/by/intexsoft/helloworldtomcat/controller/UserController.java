@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import by.intexsoft.helloworldtomcat.model.User;
 import by.intexsoft.helloworldtomcat.service.UserService;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+
 /**
  * User controller for application
  */
@@ -98,5 +101,23 @@ public class UserController {
 			LOGGER.error("Exception in getUser method: " + e.getLocalizedMessage());
 			return null;
 		}
+	}
+
+	/**
+	 * Method edit {@link User}
+	 * @return {@link User}
+	 */
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public ResponseEntity<?> editUser(@RequestBody User requestUser) throws IOException {
+		LOGGER.info("Start editing user");
+		if (isNotEmpty(requestUser.name) && isNotEmpty(requestUser.password) && isNotEmpty(requestUser.authorities.toString())) {
+			User user = userService.edit(requestUser);
+			if (user != null) {
+				LOGGER.info("Edit user successful");
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
+		}
+		LOGGER.error("Edit user failed");
+		return new ResponseEntity<>("Edit user failed", HttpStatus.BAD_REQUEST);
 	}
 }
