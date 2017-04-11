@@ -1,6 +1,4 @@
-# Simple web application with using Spring and Hibernate
-
-# Version 1.2
+# Picture Gallery
 
 ## Tutorial how to install the project
 
@@ -14,13 +12,15 @@ Installing environment (You need Java 8 to install):
 
 4. Download and install PostgreSQL by [link](https://www.postgresql.org/download/windows/).
 
+5. Download and install NodeJS with npm by [link](https://nodejs.org/en/download/).
+
 ## Building project
 
 1. Download or clone project from this repository.
 
 2. In the console, go to the folder with the project and run the command `gradle war`.
 
-3. Copy file `HelloWorldTomcat.war` from folder /build/libs/ to Tomcat's /webapps/.
+3. Copy file `PictureGallery.war` from folder /build/libs/ to Tomcat's /webapps/.
 
 ## Logging
 
