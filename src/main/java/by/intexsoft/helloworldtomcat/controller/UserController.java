@@ -1,20 +1,16 @@
 package by.intexsoft.helloworldtomcat.controller;
 
-import java.io.IOException;
-import java.util.List;
-
-import by.intexsoft.helloworldtomcat.model.Login;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import by.intexsoft.helloworldtomcat.model.User;
+import by.intexsoft.helloworldtomcat.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import by.intexsoft.helloworldtomcat.model.User;
-import by.intexsoft.helloworldtomcat.service.UserService;
 
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import java.util.List;
+
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 /**
@@ -31,19 +27,15 @@ public class UserController {
 
     /**
      * Register method
-     * Parse income {@link Login} object
-     * Add {@link by.intexsoft.helloworldtomcat.model.User} do database if not exists
+     * Add {@link User} do database if not exists
+     *
+     * @return {@link ResponseEntity}
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> register(@RequestBody String userPass) throws IOException {
+    public ResponseEntity<?> register(@RequestBody User requestUser) {
         LOGGER.info("Start registration");
-        ObjectMapper mapper = new ObjectMapper();
-        Login login = mapper.readValue(userPass, Login.class);
-        User newUser = new User();
-        newUser.name = login.username;
-        newUser.password = login.password;
-        if (userService.findByName(newUser.name) == null) {
-            User addedUser = userService.add(newUser);
+        if (userService.findByName(requestUser.name) == null) {
+            User addedUser = userService.add(requestUser);
             if (addedUser != null) {
                 LOGGER.info("Registration successful");
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -109,7 +101,7 @@ public class UserController {
     /**
      * Method edit {@link User} in database
      *
-     * @return {@link User}
+     * @return {@link ResponseEntity}
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public ResponseEntity<?> editUser(@RequestBody User requestUser) {
@@ -128,7 +120,7 @@ public class UserController {
     /**
      * Method delete {@link User} from database
      *
-     * @return {@link User}
+     * @return {@link ResponseEntity}
      */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public ResponseEntity<?> deleteUser(@RequestBody User requestUser) {

@@ -22,12 +22,19 @@ public class User extends Base {
     @Column
     public String password;
 
+    /**
+     * Field stores user {@link Authority}s
+     */
     @ManyToMany(targetEntity = Authority.class, fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     public List<Authority> authorities;
 
+    /**
+     * Method set authorities for user
+     * @param authorities
+     */
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }

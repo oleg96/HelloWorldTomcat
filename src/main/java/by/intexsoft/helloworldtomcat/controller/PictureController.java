@@ -29,6 +29,7 @@ public class PictureController {
 
     /**
      * Method add {@link Picture} to database
+     *
      * @return {@link ResponseEntity}
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -47,6 +48,7 @@ public class PictureController {
 
     /**
      * Method get all pictures in JSON format
+     *
      * @return List<{@link Picture}>
      */
     @RequestMapping("/pictures")
@@ -63,6 +65,7 @@ public class PictureController {
 
     /**
      * Method get picture by id in JSON format
+     *
      * @param id
      * @return {@link Picture}
      */
@@ -80,6 +83,7 @@ public class PictureController {
 
     /**
      * Method get picture by name in JSON format
+     *
      * @param name
      * @return {@link Picture}
      */
@@ -97,6 +101,7 @@ public class PictureController {
 
     /**
      * Method edit {@link Picture} in database
+     *
      * @return {@link ResponseEntity}
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -115,6 +120,7 @@ public class PictureController {
 
     /**
      * Method delete {@link Picture} from database
+     *
      * @return {@link ResponseEntity}
      */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)

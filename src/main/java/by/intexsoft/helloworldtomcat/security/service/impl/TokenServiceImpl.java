@@ -14,6 +14,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implementation of {@link TokenService} interface
+ */
 @Service
 public class TokenServiceImpl implements TokenService {
 

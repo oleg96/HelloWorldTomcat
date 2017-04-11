@@ -1,23 +1,23 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Http, Response, RequestOptions, Headers} from '@angular/http';
 import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map'
+import {User} from "../model/user";
 
 @Injectable()
 export class RegisterService {
 
     constructor(private http: Http) { }
 
-    register(username: string, password: string): Observable<boolean> {
-        return this.http.post('user/register/', JSON.stringify({ username: username, password: password }))
+    register(user: User): Observable<boolean> {
+        const body = JSON.stringify({name: user.name, password: user.password});
+        const options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
+        return this.http.post('user/register/', body, options)
             .map((response: Response) => {
-                console.log(response);
                 let result = response.ok;
                 if (result) {
-                    console.log(result);
                     return true;
                 }
-                console.log(result);
                 return false;
             })
             .catch(this.handleServerError);

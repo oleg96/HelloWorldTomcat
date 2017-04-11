@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Implementation of {@link TokenAuthenticationService} interface
+ */
 @Service
 public class TokenAuthenticationServiceImpl implements TokenAuthenticationService {
 

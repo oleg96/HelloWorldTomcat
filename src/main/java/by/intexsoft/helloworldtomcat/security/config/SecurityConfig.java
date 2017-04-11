@@ -14,6 +14,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Configuration for Spring Security
+ */
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -23,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/picture/pictures/**", "/register", "/login").permitAll()
+                .antMatchers("/", "/picture/pictures/**", "user/register", "/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/picture/add").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.POST, "/picture/edit").hasAuthority("ROLE_ADMIN")
                 .antMatchers(HttpMethod.POST, "/picture/delete").hasAuthority("ROLE_ADMIN")

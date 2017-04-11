@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
@@ -37,13 +35,13 @@ public class AuthenticationController {
 
     /**
      * Login method
-     * Find {@link by.intexsoft.helloworldtomcat.model.User} in database by username
+     * Find {@link User} in database by username
      * Generate token from {@link TokenService}
      *
      * @return {@link String} token
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<?> authenticate(@RequestBody User requestUser) throws IOException {
+    public ResponseEntity<?> authenticate(@RequestBody User requestUser) {
         LOGGER.info("Start authentication");
         if (isNotEmpty(requestUser.name) && isNotEmpty(requestUser.password)) {
             User user = userService.findByName(requestUser.name);

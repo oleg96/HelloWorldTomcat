@@ -52,6 +52,7 @@ export class PictureAddComponent {
         this.options['data']['tags'] = this.picture.tags;
         this.options['data']['image'] = this.previewData;
         this.inputUploadEvents.emit('startUpload');
+        this.loading = false;
     }
 
     beforeUpload(uploadingFile: UploadedFile): void {

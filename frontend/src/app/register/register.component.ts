@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {RegisterService} from "./register.service";
+import {User} from "../model/user";
 
 @Component({
     selector: 'register-component',
@@ -22,7 +23,7 @@ export class RegisterComponent {
             this.error = 'Password and it confirmation does not equals';
             this.loading = false;
         }
-        else this.registerService.register(this.reg.username, this.reg.password)
+        else this.registerService.register(new User(this.reg.username, this.reg.password))
             .subscribe(result => {
                     if (result === true) {
                         this.router.navigate(['/']);

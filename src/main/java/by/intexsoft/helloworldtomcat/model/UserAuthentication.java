@@ -13,6 +13,10 @@ public class UserAuthentication implements Authentication {
     private final User user;
     private boolean authenticated = true;
 
+    /**
+     * Constructor for {@link UserAuthentication} class
+     * @param user
+     */
     public UserAuthentication(User user) {
         this.user = user;
     }

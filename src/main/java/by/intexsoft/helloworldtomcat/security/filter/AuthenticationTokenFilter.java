@@ -12,10 +12,17 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-public class AuthenticationTokenFilter extends GenericFilterBean{
+/**
+ * Filter for Spring Security
+ */
+public class AuthenticationTokenFilter extends GenericFilterBean {
 
     private final TokenAuthenticationService authenticationService;
 
+    /**
+     * Constructor for {@link AuthenticationTokenFilter} class
+     * @param authenticationService
+     */
     public AuthenticationTokenFilter(TokenAuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
