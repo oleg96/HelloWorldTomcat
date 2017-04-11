@@ -53,7 +53,7 @@ export class UserService {
                 'x-auth-token': authUser.token
             })
         });
-        return this.http.get('user/users/' + inputText)
+        return this.http.get('user/users/' + inputText, options)
             .toPromise()
             .then(response => response.json())
             .catch(error => {
@@ -69,7 +69,7 @@ export class UserService {
                 'x-auth-token': authUser.token
             })
         });
-        return this.http.get('user/users/:' + inputId)
+        return this.http.get('user/users/:' + inputId, options)
             .toPromise()
             .then(response => response.json())
             .catch(error => {
@@ -79,8 +79,33 @@ export class UserService {
 
     edit(user: User): Observable<boolean> {
         const body = JSON.stringify({id: user.id, name: user.name, password: user.password, authorities: user.authorities});
-        const options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
+        let authUser: User = AuthorityComponent.getCurrentUser();
+        let options = new RequestOptions({
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-auth-token': authUser.token
+            })
+        });
         return this.http.post('user/edit', body, options)
+            .map((response: Response) => {
+                if (response.ok) {
+                    return true;
+                }
+                return false;
+            })
+            .catch(this.handleServerError);
+    }
+
+    delete(user: User): Observable<boolean> {
+        const body = JSON.stringify({id: user.id});
+        let authUser: User = AuthorityComponent.getCurrentUser();
+        let options = new RequestOptions({
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'x-auth-token': authUser.token
+            })
+        });
+        return this.http.post('user/delete', body, options)
             .map((response: Response) => {
                 if (response.ok) {
                     return true;

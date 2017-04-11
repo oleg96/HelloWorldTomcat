@@ -75,6 +75,25 @@ export class UserEditComponent implements OnInit {
                 });
     }
 
+    delete() {
+        this.loading = true;
+        if (this.user.id > 0) {
+            this.userService.delete(this.user)
+                .subscribe(result => {
+                        if (result === true) {
+                            this.router.navigate(['/admin/users']);
+                        } else {
+                            this.error = 'Error while deleting';
+                            this.loading = false;
+                        }
+                    },
+                    error => {
+                        this.error = 'Error while deleting';
+                        this.loading = false;
+                    });
+        }
+    }
+
     goBack(): void {
         this.location.back();
     }

@@ -4,6 +4,7 @@
         <tr>
             <th>User name</th>
             <th>User roles</th>
+            <th>Operations</th>
         </tr>
         </thead>
         <tbody>
@@ -12,7 +13,7 @@
             <td>
                 <li *ngFor="let authority of user.authorities">{{authority.name}}</li>
             </td>
-            <td><button class="btn btn-default" [routerLink]="['/admin/users/edit', user.id]">Edit</button></td>
+            <td><button class="btn btn-warning" [routerLink]="['/admin/users/edit', user.id]">Edit</button></td>
         </tr>
         </tbody>
     </table>
