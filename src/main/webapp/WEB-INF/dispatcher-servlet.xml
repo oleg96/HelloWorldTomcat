@@ -11,6 +11,6 @@
 
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven/>
-    <context:component-scan base-package="by.intexsoft.helloworldtomcat.controller"/>
+    <context:component-scan base-package="by.intexsoft.picturegallery.controller"/>
 
 </beans>

@@ -45,7 +45,7 @@
             </props>
         </property>
         <!-- Set base package of your entities -->
-        <property name="packagesToScan" value="by.intexsoft.helloworldtomcat.model"/>
+        <property name="packagesToScan" value="by.intexsoft.picturegallery.model"/>
     </bean>
 
     <!-- Configure the transaction manager bean -->
@@ -58,12 +58,12 @@
     <tx:annotation-driven/>
 
     <!-- Configure Spring Data JPA and set the base package of the repository interfaces -->
-    <jpa:repositories base-package="by.intexsoft.helloworldtomcat.repository"/>
+    <jpa:repositories base-package="by.intexsoft.picturegallery.repository"/>
 
-    <context:component-scan base-package="by.intexsoft.helloworldtomcat.service"/>
+    <context:component-scan base-package="by.intexsoft.picturegallery.service"/>
 
-    <context:component-scan base-package="by.intexsoft.helloworldtomcat.security.service"/>
-    <context:component-scan base-package="by.intexsoft.helloworldtomcat.security.config"/>
+    <context:component-scan base-package="by.intexsoft.picturegallery.security.service"/>
+    <context:component-scan base-package="by.intexsoft.picturegallery.security.config"/>
 
     <!-- Configure to plugin JSON as request and response in method handler -->
     <bean
