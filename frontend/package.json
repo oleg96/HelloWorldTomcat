@@ -1,10 +1,13 @@
 {
-  "name": "angular2-webpack",
-  "version": "0.0.1",
+  "name": "PictureGallery",
+  "version": "1.0.0",
   "scripts": {
     "build": "rimraf dist && webpack --progress --profile --bail",
     "server": "webpack-dev-server --inline --progress --port 3000",
-    "start": "npm run server"
+    "start": "npm run server",
+    "selenium-update": "webdriver-manager update",
+    "selenium-start": "webdriver-manager start",
+    "test": "protractor protractor.config.js"
   },
   "dependencies": {
     "@angular/common": "~2.4.0",
@@ -16,7 +19,6 @@
     "@angular/platform-browser-dynamic": "~2.4.0",
     "@angular/router": "~3.4.0",
     "core-js": "^2.4.1",
-    "ngx-uploader": "git+https://github.com/jkuri/ngx-uploader.git",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.1",
     "zone.js": "^0.7.4"
@@ -34,6 +36,8 @@
     "typescript": "^2.1.5",
     "webpack": "^2.2.1",
     "webpack-dev-server": "2.4.1",
-    "ngx-uploader": "2.2.7"
+    "ngx-uploader": "2.2.7",
+    "protractor": "5.1.1",
+    "jasmine-core": "2.5.2"
   }
 }
