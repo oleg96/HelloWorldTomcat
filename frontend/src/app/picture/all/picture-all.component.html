@@ -19,6 +19,7 @@
                 <td>{{picture.tags}}</td>
                 <td><img [src]="picture.image | secureUrl" style="max-width: 100%"/></td>
                 <button class="btn btn-default" [routerLink]="['/pictures', picture.id]">Details</button>
+                <button *ngIf="auth.canActivate() && authority.canWorkWithAdminPanel()" class="btn btn-warning" [routerLink]="['/pictures/edit', picture.id]">Edit</button>
             </tr>
         </tbody>
     </table>

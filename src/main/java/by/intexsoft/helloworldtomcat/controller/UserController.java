@@ -139,6 +139,6 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         LOGGER.error("Delete user failed");
-        return new ResponseEntity<>("Detele user failed", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Delete user failed", HttpStatus.BAD_REQUEST);
     }
 }

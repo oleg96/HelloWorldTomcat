@@ -8,13 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 /**
  * Picture controller for application
@@ -29,30 +28,21 @@ public class PictureController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PictureController.class);
 
     /**
-     * Method add <{@link Picture}> into database
-     * @return List<{@link Picture}>
+     * Method add {@link Picture} to database
+     * @return {@link ResponseEntity}
      */
-    @RequestMapping("/add")
-    public ResponseEntity<?> add(@RequestBody String data) throws IOException {
-        LOGGER.info("Start add picture");
-        ObjectMapper mapper = new ObjectMapper();
-        Picture picture = mapper.readValue(data, Picture.class);
-        Picture newPicture = new Picture();
-        newPicture.author = picture.author;
-        newPicture.name = picture.name;
-        newPicture.description = picture.description;
-        newPicture.owner = picture.owner;
-        newPicture.tags = picture.tags;
-        newPicture.image = picture.image;
-        if (pictureService.findByName(newPicture.name) == null) {
-            Picture addedPicture = pictureService.add(newPicture);
-            if (addedPicture != null) {
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ResponseEntity<?> addPicture(@RequestBody Picture requestPicture) {
+        LOGGER.info("Start adding picture");
+        if (pictureService.findById(requestPicture.id) == null) {
+            Picture picture = pictureService.add(requestPicture);
+            if (picture != null) {
                 LOGGER.info("Adding picture successful");
                 return new ResponseEntity<>(HttpStatus.OK);
             }
         }
         LOGGER.error("Adding picture failed");
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Adding picture failed", HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -103,5 +93,39 @@ public class PictureController {
             LOGGER.error("Exception in getPicture method: " + e.getLocalizedMessage());
             return null;
         }
+    }
+
+    /**
+     * Method edit {@link Picture} in database
+     * @return {@link ResponseEntity}
+     */
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public ResponseEntity<?> editPicture(@RequestBody Picture requestPicture) {
+        LOGGER.info("Start editing picture");
+        if (isNotEmpty(requestPicture.author) && isNotEmpty(requestPicture.name) && isNotEmpty(requestPicture.description) && isNotEmpty(requestPicture.owner) && isNotEmpty(requestPicture.tags) && isNotEmpty(requestPicture.image)) {
+            Picture picture = pictureService.edit(requestPicture);
+            if (picture != null) {
+                LOGGER.info("Edit picture successful");
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+        }
+        LOGGER.error("Edit picture failed");
+        return new ResponseEntity<>("Edit picture failed", HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * Method delete {@link Picture} from database
+     * @return {@link ResponseEntity}
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public ResponseEntity<?> deletePicture(@RequestBody Picture requestPicture) {
+        LOGGER.info("Start deleting picture");
+        if (requestPicture.id > 0) {
+            pictureService.delete(requestPicture.id);
+            LOGGER.info("Delete picture successful");
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        LOGGER.error("Delete picture failed");
+        return new ResponseEntity<>("Delete picture failed", HttpStatus.BAD_REQUEST);
     }
 }
