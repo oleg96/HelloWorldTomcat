@@ -21,10 +21,13 @@ dependencies {
 	compile 'commons-codec:commons-codec:1.10'
 	compile 'commons-io:commons-io:2.5'
 	compile 'org.apache.commons:commons-lang3:3.5'
+
+	testCompile 'junit:junit:4.12'
+	testCompile 'org.springframework:spring-test:4.3.6.RELEASE'
 }
 
 war.dependsOn 'frontend:npm_run_build'
 
 war {
-    from 'frontend/dist' // adds frontend to the root of the archive
+    from 'frontend/dist'
 }
