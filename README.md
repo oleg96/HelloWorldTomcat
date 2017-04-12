@@ -22,6 +22,30 @@ Installing environment (You need Java 8 to install):
 
 3. Copy file `PictureGallery.war` from folder /build/libs/ to Tomcat's /webapps/.
 
+## Testing
+
+For backend testing:
+
+1. In the console, go to the folder with the project and run the command `gradle test`.
+
+For frontend testing:
+
+1. In the console, go to the /frontend folder.
+
+2. In the console, run the command `selenium-update`
+
+3. In the console, run the command `selenium-start`
+
+4. In the console, run the command `test`
+
+## Client debugging
+
+1. In the console, go to the /frontend folder.
+
+2. In the console, run the command `npm run start`
+
+Now you can debug client at `http://localhost:3000`
+
 ## Logging
 
-Logging save to Tomcat `/logs/debug.log`.
+Logs save to Tomcat `/logs/debug.log`.
