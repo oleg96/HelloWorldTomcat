@@ -15,7 +15,6 @@ export class LogoutComponent implements OnInit {
         private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
-        // reset login status
         this.authenticationService.logout();
         this.router.navigate(['/']);
     }

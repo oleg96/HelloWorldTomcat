@@ -1,4 +1,5 @@
 import {Authority} from "./authority";
+
 export class User {
     id: number;
     name: string;

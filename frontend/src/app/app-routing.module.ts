@@ -9,7 +9,7 @@ import {RegisterComponent} from "./register/register.component";
 import {PictureEditComponent} from "./picture/edit/picture-edit.component";
 
 const routes: Routes = [
-    {path: '', redirectTo: '', pathMatch: 'full'},
+    {path: '', redirectTo: 'pictures/all', pathMatch: 'full'},
     {path: 'pictures/all', component: PictureAllComponent},
     {path: 'pictures/:id', component: PictureComponent},
     {path: 'pictures/edit/:id', component: PictureEditComponent},

@@ -9,7 +9,6 @@ import {TranslateService} from './translate/translate.service';
 })
 export class AppComponent implements OnInit {
 
-    public translatedText: string;
     public supportedLanguages: any[];
 
     constructor(public auth: AuthenticationGuard, public authority: AuthorityComponent, public translate: TranslateService) {

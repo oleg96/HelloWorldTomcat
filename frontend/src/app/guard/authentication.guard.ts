@@ -8,10 +8,8 @@ export class AuthenticationGuard implements CanActivate {
 
     canActivate() {
         if (localStorage.getItem('currentUser')) {
-            // logged in so return true
             return true;
         }
-        // not logged in so return false
         return false;
     }
 }
